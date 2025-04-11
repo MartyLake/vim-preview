@@ -568,10 +568,10 @@ function! preview#preview_goto(cmd)
 	let [l:tabnr, l:winnr] = preview#window_find(pid)
 	silent! wincmd P
 	let l:bufnr = winbufnr(l:winnr)
-	let l:bufname = bufname(l:bufnr)
+	let l:bufpath = expand("#".l:bufnr.":p")
 	let l:line = line('.')
 	call preview#window_goto_uid(uid)
-	silent exec a:cmd.' '.fnameescape(l:bufname)
+	silent exec a:cmd.' '.fnameescape(l:bufpath)
 	if winbufnr('%') == l:bufnr
 		silent exec ''.l:line
 		call preview#window_up(0)
